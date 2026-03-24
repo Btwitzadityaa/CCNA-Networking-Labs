@@ -1,0 +1,44 @@
+! SSH Configuration Project
+
+enable
+configure terminal
+
+! Set hostname (REQUIRED)
+hostname Router1
+
+! Set domain name (REQUIRED for RSA key)
+ip domain-name cisco.com
+
+! Create local user
+username admin secret cisco
+
+! Generate RSA keys
+crypto key generate rsa
+1024
+
+! Enable SSH v2
+ip ssh version 2
+
+! Configure interface
+interface gig0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+
+! Configure VTY lines for SSH
+line vty 0 4
+login local
+transport input ssh
+
+end
+write memory
+
+
+PC CONFIG
+IP → 192.168.1.2
+Subnet → 255.255.255.0
+Gateway → 192.168.1.1
+
+TEST SSH
+
+From PC:ssh -l admin 192.168.1.1
+Password: cisco
