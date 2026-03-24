@@ -1,0 +1,33 @@
+enable
+configure terminal
+
+! Set hostname
+hostname Router1
+
+! Configure interface (connect to PC)
+interface gig0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+
+! Set enable password (optional)
+enable password cisco
+
+! Configure VTY lines for Telnet
+line vty 0 4
+password cisco
+login
+transport input telnet
+
+end
+write memory
+
+
+PC CONFIG
+IP Address → 192.168.1.2
+Subnet Mask → 255.255.255.0
+Default Gateway → 192.168.1.1
+
+TEST COMMAND
+
+From PC:telnet 192.168.1.1
+Enter password: cisco
